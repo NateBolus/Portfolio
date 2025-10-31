@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nathaniel Nii Okai Lartey | Geospatial Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/alpinejs" defer></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans" x-data="portfolio()">
+  <!-- Header -->
+  <header class="bg-blue-900 text-white py-6">
+    <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
+      <h1 class="text-2xl font-bold flex items-center gap-2">
+  <img src="../images/LOGO.png" alt="Logo" class="w-13 h-12 rounded-full border border-blue" />
+  
+</h1>
+      <nav class="space-x-6 mt-4 md:mt-0">
+        <a href="#about" class="hover:text-blue-300">About</a>
+        <a href="#projects" class="hover:text-blue-300">Projects</a>
+        <a href="#gallery" class="hover:text-blue-300">Gallery</a>
+        <a href="#contact" class="hover:text-blue-300">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-blue-100 py-20 text-center">
+    <h2 class="text-4xl font-bold text-blue-900">Nathaniel Nii Okai Lartey</h2>
+    <p class="mt-4 text-lg text-gray-700">Land Surveyor | Geospatial Engineer | GIS Analyst | Minister of God</p>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-16 container mx-auto px-6 text-center">
+    <h3 class="text-3xl font-semibold text-blue-900 mb-6">About Me</h3>
+    <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+      <div class="flex flex-col items-center">
+        <img id="profilePhoto" src="../images/ME.jpg" alt="Nathaniel Lartey" class="rounded-full shadow-lg w-48 h-48 object-cover border-4 border-blue-900 mb-4" />
+        <label class="bg-blue-900 text-white px-4 py-2 rounded-xl cursor-pointer hover:bg-blue-800">
+          Change Photo
+          <input type="file" accept="image/*" class="hidden" @change="updatePhoto($event)" />
+        </label>
+      </div>
+      <p class="text-gray-700 leading-relaxed max-w-2xl">
+        I am a Land Surveyor, Geospatial Analyst, and Minister of God passionate about applying spatial data science to solve challenges
+        in land management, urban development, and environmental stewardship while mapping lives and places through faith-based service.
+        My experience spans cadastral surveys, road setting out, GNSS-based engineering surveys, and GIS-based analysis. With projects across Ghana and The Gambia,
+        I integrate precision fieldwork, digital mapping, and spiritual purpose to promote transformation and sustainable development.
+      </p>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="bg-white py-16 container mx-auto px-6">
+    <h3 class="text-3xl font-semibold text-blue-900 mb-6 text-center">Highlighted Projects</h3>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <template x-for="project in projects" :key="project.title">
+        <div class="bg-gray-100 p-6 rounded-xl shadow-md hover:shadow-xl transition">
+          <h4 class="font-bold text-xl mb-2" x-text="project.title"></h4>
+          <p class="text-gray-700" x-text="project.description"></p>
+        </div>
+      </template>
+    </div>
+
+    <div class="text-center mt-10">
+      <button @click="showProjects = !showProjects" class="bg-blue-900 text-white px-6 py-3 rounded-xl hover:bg-blue-800">
+        Add New Project
+      </button>
+
+      <div x-show="showProjects" class="mt-6 p-6 bg-blue-50 rounded-xl shadow-md max-w-xl mx-auto">
+        <h4 class="font-bold mb-4 text-blue-900">Add a Project</h4>
+        <input type="text" placeholder="Project Title" class="w-full border rounded p-2 mb-3" x-model="newTitle">
+        <textarea placeholder="Project Description" class="w-full border rounded p-2 mb-3" x-model="newDescription"></textarea>
+        <button @click="addProject" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Save Project</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="bg-blue-50 py-16">
+    <div class="container mx-auto px-6">
+      <h3 class="text-3xl font-semibold text-blue-900 mb-6 text-center">Project Gallery</h3>
+      <p class="text-gray-600 mb-8 text-center">Explore fieldwork, mapping visuals, GNSS operations, and faith-driven initiatives that impact lives.</p>
+
+      <!-- upload control -->
+      <div class="flex justify-center mb-6">
+        <label class="bg-blue-900 text-white px-4 py-2 rounded-xl cursor-pointer hover:bg-blue-800">
+          Add Images
+          <input type="file" accept="image/*" multiple class="hidden" @change="addGalleryImages($event)" />
+        </label>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <img src="../images/IMG_9603.jpg" alt="Survey Work" class="rounded-xl shadow-md hover:scale-105 transition" />
+        <img src="../images/Screenshot (39).png" alt="GIS Map" class="rounded-xl shadow-md hover:scale-105 transition" /> 
+        <img src="../images/238fbd82-12b1-4b2c-9416-b4a7fc656106.JPG" alt="Survey Instrument" class="rounded-xl shadow-md hover:scale-105 transition" />
+        <img src="../images/Screenshot (43).png" alt="GIS Map 2" class="rounded-xl shadow-md hover:scale-105 transition" />
+        <img src="../images/f6ab4086-b493-4f76-9a22-560dac9d8bc4.JPG" alt="Aerial Surveys" class="rounded-xl shadow-md hover:scale-105 transition" />
+        <img src="../images/IMG_9520.jpg" alt="GNSS Instrument" class="rounded-xl shadow-md hover:scale-105 transition" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-16 container mx-auto px-6 text-center">
+    <h3 class="text-3xl font-semibold text-blue-900 mb-6">Contact</h3>
+    <p class="text-gray-700 mb-4">Let's connect and collaborate on surveying, GIS, or faith-driven geospatial projects.</p>
+    <div class="space-y-3">
+      <p class="text-gray-800 font-semibold">📞 +233 55 171 0144</p>
+      <p class="text-gray-800">📱 WhatsApp: <a href="https://wa.me/qr/YA6AYJZDMM27K1" class="text-blue-700 hover:underline">Chat on WhatsApp</a></p>
+      <p class="text-gray-800">🔗 LinkedIn: <a href="https://www.linkedin.com/in/nathaniel-lartey-2860121b4" class="text-blue-700 hover:underline">linkedin.com/in/nathaniel-lartey</a></p>
+      <a href="mailto:nathaniel.lartey@gmail.com" class="inline-block bg-blue-900 text-white px-6 py-3 rounded-xl shadow-md hover:bg-blue-800 mt-4">Email Me</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-blue-900 text-gray-300 text-center py-6">
+    <p>&copy; 2025 Nathaniel Nii Okai Lartey | Mapping Lives and Places | Minister of God</p>
+  </footer>
+
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('portfolio', () => ({
+        projects: [
+          { title: 'Cadastral & Boundary Surveys', description: 'Executed land demarcations and boundary verification using GNSS and total station equipment.' },
+          { title: 'Road Surveying & Setting Out', description: 'Supported road construction projects performing alignment and level control for accurate construction execution.' },
+          { title: 'LULC Mapping – Banjul, The Gambia', description: 'Analyzed land cover changes from 2020–2025 to monitor vegetation and urban growth.' },
+          { title: 'Land Litigation Support', description: 'Used spatial analysis to support fair land dispute resolutions with GPS-based mapping evidence.' },
+          { title: 'GIS StoryMaps & Dashboards', description: 'Created interactive spatial dashboards integrating population, administrative, and environmental data across Ghana.' }
+        ],
+        showProjects: false,
+        newTitle: '',
+        newDescription: '',
+
+        // gallery state (persisted to localStorage)
+        galleryImages: [],
+
+        // load defaults or from localStorage
+        init() {
+          const stored = localStorage.getItem('portfolioGallery');
+          if (stored) {
+            try { this.galleryImages = JSON.parse(stored); return; } catch(e) { /* fall back to defaults */ }
+          }
+          // default images (adjust paths if needed)
+          this.galleryImages = [
+            { id: 1, name: 'IMG_9603.jpg', src: '../images/IMG_9603.jpg' },
+            { id: 2, name: 'Screenshot-39.png', src: '../images/Screenshot (39).png' },
+            { id: 3, name: '238fbd82-12b1-4b2c-9416-b4a7fc656106.JPG', src: '../images/238fbd82-12b1-4b2c-9416-b4a7fc656106.JPG' },
+            { id: 4, name: 'Screenshot-43.png', src: '../images/Screenshot (43).png' },
+            { id: 5, name: 'f6ab4086-b493-4f76-9a22-560dac9d8bc4.JPG', src: '../images/f6ab4086-b493-4f76-9a22-560dac9d8bc4.JPG' },
+            { id: 6, name: 'IMG_9520.jpg', src: '../images/IMG_9520.jpg' }
+          ];
+          this.saveGallery();
+        },
+
+        saveGallery() {
+          localStorage.setItem('portfolioGallery', JSON.stringify(this.galleryImages));
+        },
+
+        addGalleryImages(event) {
+          const files = Array.from(event.target.files || []);
+          if (!files.length) return;
+
+          // read files as data URLs and push to gallery
+          const readers = files.map((file, i) => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = e => resolve({ id: Date.now() + i, name: file.name, src: e.target.result });
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+          }));
+
+          Promise.all(readers).then(results => {
+            this.galleryImages.push(...results);
+            this.saveGallery();
+            // clear input so same files can be re-selected later
+            event.target.value = '';
+          }).catch(() => {
+            // silent fail
+          });
+        },
+
+        removeImage(index) {
+          this.galleryImages.splice(index, 1);
+          this.saveGallery();
+        },
+
+        updatePhoto(event) {
+          const file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = e => {
+              document.getElementById('profilePhoto').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+          }
+        },
+
+        addProject() {
+          if (this.newTitle && this.newDescription) {
+            this.projects.push({ title: this.newTitle, description: this.newDescription });
+            this.newTitle = '';
+            this.newDescription = '';
+            this.showProjects = false;
+          }
+        }
+      }))
+    });
+  </script>
+</body>
+</html>
